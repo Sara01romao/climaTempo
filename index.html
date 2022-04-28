@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Clima Cidade</title>
 </head>
 <body>
-
- 
-        <label for="">Pesquisar Cidade</label>
-       
-       
-        <select id="estado" name="estado" onchange="cidades()" required>
+      
+       <div class="divSearch">
+           <div class="divSelect">
+                <label for="">Selecione o Estado</label>    
+                <select id="estado" name="estado" onchange="stadeChoose()" required>
+                    <option value="">Selecione</option>
+                    
+                </select>
+           </div>
            
-        </select>
-
-        <select id="search" name="cidade" required>
-           <option>Selecione</option>
-        </select>
-        <button onclick="teste()"class="btnsearch" >buscar</button>
+           <div class="divSelect">
+               <label for="">Selecione o cidade</label>  
+                <select id="search" name="cidade" required>
+                    <option>Selecione</option>
+                </select>
+           </div>
+            <button onclick="teste()"class="btnsearch" >buscar</button>
+       </div>
+ 
+     
     
    
 

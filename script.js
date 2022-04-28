@@ -3,94 +3,83 @@ const state = document.getElementById("estado");
 
 const btnsearch = document.querySelector(".btnsearch");
 
-
- async function getStates(){
-    const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+//fetch list estados
+async function getStates() {
+    const response = await fetch(
+        "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
+    );
     const dados = await response.json();
-    
-   
-    state.innerHTML=`${dados.map((item)=> `<option value=${item.sigla}>${item.nome}</option>`)}   `
-   /*  console.table(dados); 
-     */
 
- }
+    const arr = `${dados.map((item) => `<option value=${item.sigla}>${item.nome}</option>`)}   `;
 
- getStates()
+    state.lastElementChild.insertAdjacentHTML("afterend", arr);
 
+}
 
- function idEstado(name){
-    async function findEstado(){
+getStates();
 
-    
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+//fetch id estado
+function idEstado(name) {
+    async function findEstado() {
+        const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
         const dados = await response.json();
-        
-        const id = dados.find((item) => item.sigla === name)
-        idState=(id.id)
 
-        cidadesApi(id.id)
-        
+        const id = dados.find((item) => item.sigla === name);
+
+        cidadesApi(id.id);
     }
 
-    findEstado()
- }
+    findEstado();
+}
 
-
- async function cidadesApi(idState){
-    const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`)
+// list cites
+async function cidadesApi(idState) {
+    const response = await fetch(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`
+    );
     const data = await response.json();
-    console.log(data)
 
-    city.innerHTML=`${data.map((item)=>`<option>${item.nome}</option>`)}`
-    
+    city.innerHTML = `${data.map((item) => `<option>${item.nome}</option>`)}`;
 }
 
-
-function cidades(){
+//onchange estado
+function stadeChoose() {
     const stateSearch = state.value;
-    idEstado(stateSearch)
-    console.log(stateSearch, "nome estado")
+    idEstado(stateSearch);
     
-
-   
 }
 
-
-
-
+//result data
 function teste() {
     const citySearch = city.value.replace(" ", "%20");
     const stateSigla = state.value;
 
+    if(citySearch !== '' && stateSigla !==""){
+        //name state
+        async function findEstado() {
+            const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
+            const dados = await response.json();
 
-    async function findEstado(){
-
-    
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-        const dados = await response.json();
-        
-        const id = dados.find((item) => item.sigla === stateSigla)
-        getApi(id.nome.replace(" ", "%20"));
-        
-        
-        
-    }
-
-    findEstado()
-
-    console.log(citySearch, "estado: ", stateSigla);
-
-   
-    async function getApi(stateSearch) {
-        const response = await fetch(
-            `https://weather.contrateumdev.com.br/api/weather/city/?city=${citySearch},${stateSearch}`
-        );
-        const data = await response.json();
-
-        if (data) {
+            const id = dados.find((item) => item.sigla === stateSigla);
+            getApi(id.nome);
         }
-        console.log(data, stateSearch);
-    }
 
-    
+        findEstado();
+
+        console.log(citySearch, "estado: ", stateSigla);
+        //result api
+        async function getApi(state) {
+            const stateSearch = state.replace(" ", "%20");
+            const response = await fetch(
+                `https://weather.contrateumdev.com.br/api/weather/city/?city=${citySearch},${stateSearch}`
+            );
+            const data = await response.json();
+
+            if (data) {
+            }
+            console.log(data, stateSearch);
+        }
+    }else{
+        console.log("erro")
+    }
 }
