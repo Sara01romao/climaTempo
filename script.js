@@ -1,6 +1,5 @@
 const city = document.querySelector("#search");
 const state = document.getElementById("estado");
-const estadoArr = [];
 
 const btnsearch = document.querySelector(".btnsearch");
 
@@ -10,7 +9,7 @@ const btnsearch = document.querySelector(".btnsearch");
     const dados = await response.json();
     
    
-    state.innerHTML=`${dados.map((item)=> `<option value=${item.nome}>${item.nome}</option>`)}   `
+    state.innerHTML=`${dados.map((item)=> `<option value=${item.sigla}>${item.nome}</option>`)}   `
    /*  console.table(dados); 
      */
 
@@ -26,38 +25,63 @@ const btnsearch = document.querySelector(".btnsearch");
         const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
         const dados = await response.json();
         
-        const id = dados.find((item) => item.nome === name)
-        console.log(id)
-   
+        const id = dados.find((item) => item.sigla === name)
+        idState=(id.id)
+
+        cidadesApi(id.id)
+        
     }
 
     findEstado()
  }
 
+
+ async function cidadesApi(idState){
+    const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idState}/municipios`)
+    const data = await response.json();
+    console.log(data)
+
+    city.innerHTML=`${data.map((item)=>`<option>${item.nome}</option>`)}`
+    
+}
+
+
 function cidades(){
     const stateSearch = state.value;
     idEstado(stateSearch)
     console.log(stateSearch, "nome estado")
-  /*   async function cidades(){
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF}/municipios`)
-        const data = await response.json();
+    
 
-    } */
+   
 }
 
 
 
 
-/* function teste() {
+function teste() {
     const citySearch = city.value.replace(" ", "%20");
-    const stateSearch = state.value.replace(" ", "%20");
+    const stateSigla = state.value;
 
-    console.log(citySearch, "estado: ", stateSearch);
 
-    if(citySearch !== "" && stateSearch !== ""){
-        getApi();
+    async function findEstado(){
+
+    
+        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+        const dados = await response.json();
+        
+        const id = dados.find((item) => item.sigla === stateSigla)
+        getApi(id.nome.replace(" ", "%20"));
+        
+        
+        
     }
-    async function getApi() {
+
+    findEstado()
+
+    console.log(citySearch, "estado: ", stateSigla);
+
+   
+    async function getApi(stateSearch) {
         const response = await fetch(
             `https://weather.contrateumdev.com.br/api/weather/city/?city=${citySearch},${stateSearch}`
         );
@@ -65,9 +89,8 @@ function cidades(){
 
         if (data) {
         }
-        console.log(data);
+        console.log(data, stateSearch);
     }
 
     
 }
- */
