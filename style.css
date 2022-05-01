@@ -19,5 +19,10 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+}
+
+.error{
+    color: rgb(241, 61, 16);
+    font-size: 0.9rem;
 }

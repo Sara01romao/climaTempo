@@ -14,14 +14,14 @@
                 <label for="">Selecione o Estado</label>    
                 <select id="estado" name="estado" onchange="stadeChoose()" required>
                     <option value="">Selecione</option>
-                    
                 </select>
+                <small class="error"></small>
            </div>
            
            <div class="divSelect">
                <label for="">Selecione o cidade</label>  
-                <select id="search" name="cidade" required>
-                    <option>Selecione</option>
+                <select disabled id="cidade" name="cidade"  onchange="cityChoose()" required>
+                    <option value="" disabled="disabled">Selecione</option>
                 </select>
            </div>
             <button onclick="teste()"class="btnsearch" >buscar</button>
@@ -32,7 +32,7 @@
    
 
     <main>
-
+      <h1 class="temp"></h1>
     </main>
     <script src="script.js"></script>
 </body>
