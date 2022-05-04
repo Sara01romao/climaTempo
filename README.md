@@ -15,7 +15,7 @@ CSS
 JAVASCRIPT
 
 ```
-## API 
+## APIs
 
 ```
 - Clima
