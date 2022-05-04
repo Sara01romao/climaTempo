@@ -4,6 +4,7 @@ const btnsearch = document.querySelector(".btnsearch");
 const error = document.querySelector(".error");
 const temp = document.querySelector(".temp");
 
+
 //fetch list estados
 async function getStates() {
     const response = await fetch(
@@ -30,7 +31,7 @@ async function findEstado(name) {
 }
 
 function idEstado(name) {
-    if(name){
+    if (name) {
         findEstado(name);
     }
 }
@@ -47,12 +48,13 @@ async function cidadesApi(idState) {
 
 //onchange estado
 function stadeChoose() {
+    temp.innerHTML = "";
     const stateSearch = state.value;
-    if(stateSearch !== ""){
-    idEstado(stateSearch);
-    city.removeAttribute('disabled')
-    }else{
-        city.innerHTML=`<option value="" disabled="disabled">Selecione</option>`
+    if (stateSearch !== "") {
+        idEstado(stateSearch);
+        city.removeAttribute("disabled");
+    } else {
+        city.innerHTML = `<option value="" disabled="disabled">Selecione</option>`;
         city.setAttribute("disabled", "disabled");
     }
 }
@@ -89,12 +91,15 @@ function teste() {
                 `https://weather.contrateumdev.com.br/api/weather/city/?city=${citySearch},${stateSearch}`
             );
             const data = await response.json();
-            console.log(data.cod);
+            console.log(data);
 
             if (data.cod === 200) {
-                temp.innerHTML = `${data.main.temp} ºC `;
+                temp.innerHTML = `
+                <p>${data.name} -${stateSigla}</p> 
+                <h2>${data.main.temp.toFixed()} ºC </h2> 
+                `;
             } else {
-                temp.innerHTML = `Cidade não encontrada `;
+                temp.innerHTML = `<p>Cidade não encontrada<br></p> <img src="./images/cloud.svg" alt=""/>`;
             }
         }
     } else {

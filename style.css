@@ -1,28 +1,108 @@
-*{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap");
+
+:root {
+    --font: "Poppins", sans-serif;
+    --color1: #ffffff69;
+    --color2: #1565c0;
+    --color2Hover: #003c8f;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+body {
+    font-family: var(--font);
+    background-color: var(--color1);
+}
 
-.divSearch{
+header svg {
+    display: block;
+    margin: 50px auto 0px;
+}
+
+svg rect{
+    transform: translateX(50px);
+    opacity: 0;
+    animation: animeLogo 0.8s ease-in-out forwards;
+}
+
+@keyframes animeLogo {
+   to{
+    transform: initial;
+    opacity: initial;
+   }
+    
+}
+
+.container {
     max-width: 400px;
     margin: 50px auto 0px;
     padding: 20px;
+}
+
+.divSearch {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-
-.divSelect{
+.divSelect {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.error{
+.divSelect select {
+    height: 30px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.divSearch button {
+    background-color: var(--color2);
+    color: #fff;
+    height: 35px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.divSearch button:hover {
+    background-color: var(--color2Hover);
+}
+
+.error {
     color: rgb(241, 61, 16);
     font-size: 0.9rem;
 }
+
+main {
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main p {
+    font-size: 1rem;
+}
+main h2 {
+    font-size: 2rem;
+    color: rgb(71, 71, 71);
+}
+
+main img {
+    width: 90px;
+}
+
