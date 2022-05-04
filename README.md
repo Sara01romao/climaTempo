@@ -2,7 +2,7 @@
 
 
 ## 💻  Sobre o Projeto
-Pesquisa da temperatura nas cidades brasileiras, objetivo foi práticar o consumo de APIs com javascript.
+Pesquisa da temperatura nas cidades brasileiras, objetivo foi praticar o consumo de APIs com javascript e o uso de seus métodos
 
 <br>
 
